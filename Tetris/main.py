@@ -103,9 +103,9 @@ class Tetris:
 			for j in range(4):
 				if i * 4 + j in self.figure.image():
 					if i + self.figure.y > self.rows - 1 or \
-					   j + self.figure.x > self.cols - 1 or \
-					   j + self.figure.x < 0 or \
-					   self.board[i + self.figure.y][j + self.figure.x] > 0:
+						j + self.figure.x > self.cols - 1 or \
+						j + self.figure.x < 0 or \
+						self.board[i + self.figure.y][j + self.figure.x] > 0:
 						intersection = True
 		return intersection
 
