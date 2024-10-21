@@ -41,18 +41,18 @@ cmode = 0
 
 # LOADING IMAGES *************************************************************
 
-bg = pygame.image.load('Assets/bg.png')
-logo = pygame.image.load('Assets/logo.jpg')
-logo2 = pygame.image.load('Assets/logo2.jpg')
+bg = pygame.image.load('c:/GitHub/Python-Games/snake/Assets/bg.png')
+logo = pygame.image.load('c:/GitHub/Python-Games/snake/Assets/logo.jpg')
+logo2 = pygame.image.load('c:/GitHub/Python-Games/snake/Assets/logo2.jpg')
 
-gameover_img = pygame.image.load('Assets/gameover.png')
-bar_img = pygame.image.load('Assets/bar.png')
+gameover_img = pygame.image.load('c:/GitHub/Python-Games/snake/Assets/gameover.png')
+bar_img = pygame.image.load('c:/GitHub/Python-Games/snake/Assets/bar.png')
 
 # LOADING TILES **************************************************************
 
 tile_list = []
 for i in range(5):
-	tile = pygame.image.load(f'Tiles/{i+1}.png')
+	tile = pygame.image.load(f'c:/GitHub/Python-Games/snake/Tiles/{i+1}.png')
 	tile_list.append(tile)
 
 tile_size = {
@@ -73,9 +73,9 @@ def drawGrid():
 
 def loadlevel(level):
 	if level == 'boxed':
-		file = f'Levels/boxed'
+		file = f'c:/GitHub/Python-Games/snake/Levels/boxed'
 	else:
-		file = f'Levels/level{level}_data'
+		file = f'c:/GitHub/Python-Games/snake/Levels/level{level}_data'
 	with open(file, 'rb') as f:
 		data = pickle.load(f)
 		for y in range(len(data)):
@@ -110,10 +110,10 @@ class Snake:
 					self.head]
 		print(self.body)
 
-		self.headup = pygame.image.load('Assets/body/uhead.png')
-		self.headdown = pygame.image.load('Assets/body/dhead.png')
-		self.headleft = pygame.image.load('Assets/body/lhead.png')
-		self.headright = pygame.image.load('Assets/body/rhead.png')
+		self.headup = pygame.image.load('c:/GitHub/Python-Games/snake/Assets/body/uhead.png')
+		self.headdown = pygame.image.load('c:/GitHub/Python-Games/snake/Assets/body/dhead.png')
+		self.headleft = pygame.image.load('c:/GitHub/Python-Games/snake/Assets/body/lhead.png')
+		self.headright = pygame.image.load('c:/GitHub/Python-Games/snake/Assets/body/rhead.png')
 
 	def update(self):
 		head = self.body[-1]
@@ -191,7 +191,7 @@ class Snake:
 class Food:
 	def __init__(self):
 		type_ = random.randint(1, 3)
-		self.image = self.temp = pygame.image.load(f'Assets/{type_}.png')
+		self.image = self.temp = pygame.image.load(f'c:/GitHub/Python-Games/snake/Assets/{type_}.png')
 		self.size = 16
 		self.ds = 1
 		self.counter = 0
@@ -224,7 +224,7 @@ class Tree:
 
 		self.imglist = []
 		for i in range(4):
-			img = pygame.image.load(f'Assets/tree{i}.png')
+			img = pygame.image.load(f'c:/GitHub/Python-Games/snake/Assets/tree{i}.png')
 			self.imglist.append(img)
 		self.image = self.imglist[self.index]
 
@@ -341,7 +341,7 @@ while running:
 
 						if tile != 3:
 							pygame.draw.rect(win, (18, 18, 18), (rect.x+2, rect.y+2,
-										 rect.width, rect.height))
+										rect.width, rect.height))
 						win.blit(tile_list[tile-1], pos)
 						if rect.collidepoint(snake.head):
 							gameover = True
