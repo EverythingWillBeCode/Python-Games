@@ -43,18 +43,18 @@ for row in range(ROWS):
 	world_data.append(col)
 
 # load images
-bg = pygame.image.load('assets/bg.png')
+bg = pygame.image.load('c:/GitHub/Python-Games/snake/assets/bg.png')
 
-save_img = pygame.image.load('assets/save_btn.png')
-load_img = pygame.image.load('assets/load_btn.png')
-left_img = pygame.image.load('assets/left.png')
-right_img = pygame.image.load('assets/right.png')
+save_img = pygame.image.load('c:/GitHub/Python-Games/snake/assets/save_btn.png')
+load_img = pygame.image.load('c:/GitHub/Python-Games/snake/assets/load_btn.png')
+left_img = pygame.image.load('c:/GitHub/Python-Games/snake/assets/left.png')
+right_img = pygame.image.load('c:/GitHub/Python-Games/snake/assets/right.png')
 
 # load tileset
 
 img_list = []
 for i in range(1,NUM_TILES+1):
-	img = pygame.image.load(f'tiles/{i}.png')
+	img = pygame.image.load(f'c:/GitHub/Python-Games/Snake/tiles/{i}.png')
 	# img = pygame.transform.scale(img, (TILE_WIDTH, TILE_SIZE))
 	img_list.append(img)
 
@@ -137,13 +137,13 @@ while running:
 
 	if save_button.draw(win):
 		#save level data
-		pickle_out = open(f'levels/level{current_level}_data', 'wb')
+		pickle_out = open(f'c:/GitHub/Python-Games/Snake/levels/level{current_level}_data', 'wb')
 		pickle.dump(world_data, pickle_out)
 		pickle_out.close()
 	if load_button.draw(win):
 		#load in level data
-		if os.path.exists(f'levels/level{current_level}_data'):
-			pickle_in = open(f'levels/level{current_level}_data', 'rb')
+		if os.path.exists(f'c:/GitHub/Python-Games/Snake/levels/level{current_level}_data'):
+			pickle_in = open(f'c:/GitHub/Python-Games/Snake/levels/level{current_level}_data', 'rb')
 			data = pickle.load(pickle_in)
 			for i in range(len(data)):
 				for j in range(len(data[0])):
