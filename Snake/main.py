@@ -1,34 +1,34 @@
 # Snake
 
-import random
-import pygame
-import pickle
+import random                      # Importa el módulo random para generar valores aleatorios
+import pygame                      # Importa la librería pygame para gráficos y eventos
+import pickle                      # Importa pickle para cargar niveles guardados en archivos
 
-pygame.init()
-SCREEN = WIDTH, HEIGHT = 288, 512
-CELLSIZE = 16
-ROWS = HEIGHT // CELLSIZE
-COLS = WIDTH // CELLSIZE
+pygame.init()                      # Inicializa todos los módulos de pygame
+SCREEN = WIDTH, HEIGHT = 288, 512  # Define el tamaño de la ventana y asigna a WIDTH y HEIGHT
+CELLSIZE = 16                      # Tamaño de cada celda de la cuadrícula
+ROWS = HEIGHT // CELLSIZE          # Número de filas en la cuadrícula
+COLS = WIDTH // CELLSIZE           # Número de columnas en la cuadrícula
 
-info = pygame.display.Info()
-width = info.current_w
-height = info.current_h
+info = pygame.display.Info()       # Obtiene información de la pantalla actual
+width = info.current_w             # Ancho de la pantalla física
+height = info.current_h            # Alto de la pantalla física
 
-if width >= height:
-	win = pygame.display.set_mode(SCREEN, pygame.NOFRAME)
-else:
-	win = pygame.display.set_mode(SCREEN, pygame.NOFRAME | pygame.SCALED | pygame.FULLSCREEN)
+if width >= height:                # Si la pantalla es horizontal o cuadrada
+    win = pygame.display.set_mode(SCREEN, pygame.NOFRAME)  # Crea ventana sin bordes
+else:                              # Si la pantalla es vertical
+    win = pygame.display.set_mode(SCREEN, pygame.NOFRAME | pygame.SCALED | pygame.FULLSCREEN)  # Pantalla completa escalada
 
-FPS = 10
-clock = pygame.time.Clock()
+FPS = 10                           # Fotogramas por segundo (velocidad del juego)
+clock = pygame.time.Clock()        # Reloj para controlar el tiempo del juego
 
 # COLORS *********************************************************************
 
-BLACK = (0, 0, 0)
-BLUE = (0, 0, 255)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)                  # Color negro (RGB)
+BLUE = (0, 0, 255)                 # Color azul (RGB)
+RED = (255, 0, 0)                  # Color rojo (RGB)
+GREEN = (0, 255, 0)                # Color verde (RGB)
+WHITE = (255, 255, 255)            # Color blanco (RGB)
 
 # LOADING FONTS **************************************************************
 
@@ -41,35 +41,35 @@ cmode = 0
 
 # LOADING IMAGES *************************************************************
 
-bg = pygame.image.load('c:/GitHub/Python-Games/snake/Assets/bg.png')
-logo = pygame.image.load('c:/GitHub/Python-Games/snake/Assets/logo.jpg')
-logo2 = pygame.image.load('c:/GitHub/Python-Games/snake/Assets/logo2.jpg')
+bg = pygame.image.load('c:/GitHub/Python-Games/snake/Assets/bg.png')         # Carga la imagen de fondo
+logo = pygame.image.load('c:/GitHub/Python-Games/snake/Assets/logo.jpg')     # Carga el logo principal
+logo2 = pygame.image.load('c:/GitHub/Python-Games/snake/Assets/logo2.jpg')   # Carga el segundo logo
 
-gameover_img = pygame.image.load('c:/GitHub/Python-Games/snake/Assets/gameover.png')
-bar_img = pygame.image.load('c:/GitHub/Python-Games/snake/Assets/bar.png')
+gameover_img = pygame.image.load('c:/GitHub/Python-Games/snake/Assets/gameover.png')  # Carga la imagen de Game Over
+bar_img = pygame.image.load('c:/GitHub/Python-Games/snake/Assets/bar.png')            # Carga la imagen de la barra de progreso
 
 # LOADING TILES **************************************************************
 
-tile_list = []
-for i in range(5):
-	tile = pygame.image.load(f'c:/GitHub/Python-Games/snake/Tiles/{i+1}.png')
-	tile_list.append(tile)
+tile_list = []                                                      # Lista para almacenar los tiles
+for i in range(5):                                                  # Recorre los 5 tipos de tiles
+    tile = pygame.image.load(f'c:/GitHub/Python-Games/snake/Tiles/{i+1}.png')  # Carga cada tile
+    tile_list.append(tile)                                           # Añade el tile a la lista
 
-tile_size = {
-	1 : (16, 64),
-	2 : (64, 16),
-	3 : (32, 32),
-	4 : (32, 32),
-	5 : (32, 32)
+tile_size = {                                                       # Diccionario con el tamaño de cada tile
+    1 : (16, 64),
+    2 : (64, 16),
+    3 : (32, 32),
+    4 : (32, 32),
+    5 : (32, 32)
 }
 
 # FUNCTIONS & CLASSES ********************************************************
 
 def drawGrid():
-	for row in range(ROWS):
-		pygame.draw.line(win, WHITE, (0, row*CELLSIZE), (WIDTH, row*CELLSIZE), 1)
-	for col in range(COLS):
-		pygame.draw.line(win, WHITE, (col*CELLSIZE, 0), (col*CELLSIZE, HEIGHT))
+    for row in range(ROWS):                                         # Dibuja las líneas horizontales de la cuadrícula
+        pygame.draw.line(win, WHITE, (0, row*CELLSIZE), (WIDTH, row*CELLSIZE), 1)
+    for col in range(COLS):                                         # Dibuja las líneas verticales de la cuadrícula
+        pygame.draw.line(win, WHITE, (col*CELLSIZE, 0), (col*CELLSIZE, HEIGHT))
 
 def loadlevel(level):
 	if level == 'boxed':
